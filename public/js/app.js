@@ -8,3 +8,21 @@ socket.on('message', function(message){
 	console.log('New meassage:');
 	console.log(message.text);
 });
+
+//handles submitting of new message
+var $form = jQuery('#message-form');
+
+$form.on('submit', function(event) {
+	event.preventDefault();
+
+	var $message = $form.find('input[name=message]');
+
+	socket.emit('message', {
+		text: $message.val()
+	});
+
+	//remove contents of the input field. sender et empty input afsted
+	
+	$message.val('');	
+
+});
